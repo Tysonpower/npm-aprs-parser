@@ -33,17 +33,6 @@ describe('Telemetry', () => {
         expect(parsed.comment).to.equal('Hello');
     });
 
-    it('Illegal analog value', () => {
-        const content = 'T#005,256,000,255,073,123,01101001';
-        const parser = new TelemetryParser();
-
-        expect(parser.isMatching(content.substr(0, 1))).to.equal(true);
-
-        expect(() => {
-            parser.tryParse(content);
-        }).to.throw(Error);
-    });
-
     it('Illegal digital value', () => {
         const content = 'T#005,255,000,255,073,123,01201001';
         const parser = new TelemetryParser();

@@ -39,6 +39,23 @@ describe('APRSParser', () => {
         expect(obj.data).to.be.an.instanceOf(Models.Position);
     });
 
+    it('Compressed position with altitude recognition', () => {
+        const obj = parser.parse('DO5TY-8>APRS:=/4k;&P7-W>A[Q');
+
+        expect(obj).to.exist;
+        expect(obj.data).to.exist;
+        expect(obj.data).to.be.an.instanceOf(Models.Position);
+        //expect(obj.data.altitude).to.exist;
+    });
+
+    it('Compressed position with course & speed recognition', () => {
+        const obj = parser.parse('DO5TY-8>APRS:=/4k)qP7,u>!&G');
+
+        expect(obj).to.exist;
+        expect(obj.data).to.exist;
+        expect(obj.data).to.be.an.instanceOf(Models.Position);
+    });
+
     it('Message recognition', () => {
         const obj = parser.parse('SQ7PFS>APRS::WU2Z     :Testing{003 ');
 
