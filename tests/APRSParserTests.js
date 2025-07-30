@@ -45,7 +45,7 @@ describe('APRSParser', () => {
         expect(obj).to.exist;
         expect(obj.data).to.exist;
         expect(obj.data).to.be.an.instanceOf(Models.Position);
-        //expect(obj.data.altitude).to.exist;
+        expect(obj.data.altitude).to.exist;
     });
 
     it('Compressed position with course & speed recognition', () => {
@@ -54,6 +54,15 @@ describe('APRSParser', () => {
         expect(obj).to.exist;
         expect(obj.data).to.exist;
         expect(obj.data).to.be.an.instanceOf(Models.Position);
+    });
+
+    it('Compressed position with no data recognition', () => {
+        const obj = parser.parse('DO5TY-8>APRS:=/4k)qP7,u> oQ');
+
+        expect(obj).to.exist;
+        expect(obj.data).to.exist;
+        expect(obj.data).to.be.an.instanceOf(Models.Position);
+        expect(obj.data.altitude).to.not.exist;
     });
 
     it('Message recognition', () => {
