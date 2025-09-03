@@ -105,6 +105,15 @@ describe('APRSParser', () => {
         expect(obj.data).to.be.an.instanceOf(Models.TelemetryEquations);
     });
 
+    it('Telemetry negative numbers', () => {
+        const obj = parser.parse('DO5TY-1>APRS-1,WIDE1-1,WIDE2-1,qAS,DH8OH-10:T#067,55.40,4.30,-4.3,7,3347.7,11000000');
+
+        expect(obj).to.exist;
+        expect(obj.data).to.exist;
+        expect(obj.data).to.be.an.instanceOf(Models.Telemetry);
+        expect(obj.data.analog[2]).to.equal(-4.3)
+    });
+
     it('Telemetry bit sense recognition', () => {
         const obj = parser.parse('SQ7PFS>APRS::N0QBF-11 :BITS.10110000,N0QBF’s Big Balloon');
 
